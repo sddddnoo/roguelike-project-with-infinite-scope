@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ddouwo5bppenm"]
+
+[ext_resource type="Script" uid="uid://dd4evj001ykkv" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://bpqndgenlgx1l" path="res://scripts/weaponhandler.gd" id="2_g2els"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 8.0
+
+[node name="Player" type="CharacterBody2D" unique_id=906003102]
+script = ExtResource("1_3vyb7")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=529920517]
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 8.0
+offset_bottom = 8.0
+pivot_offset = Vector2(8, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1296959115]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="itemhandler" type="Area2D" parent="." unique_id=2005800005]
+script = ExtResource("2_g2els")

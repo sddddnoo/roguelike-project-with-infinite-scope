@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://d34aevi6scquf"]
+
+[ext_resource type="PackedScene" uid="uid://ddouwo5bppenm" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="Texture2D" uid="uid://byv73ybkwy2v6" path="res://icon.svg" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://byqpp8uatn1kq" path="res://scenes/sword.tscn" id="3_sugp2"]
+[ext_resource type="AudioStream" uid="uid://bajuud8424j8v" path="res://assets/placeholder music.wav" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://wxcapaccgl65" path="res://scenes/coin.tscn" id="5_tbgi4"]
+
+[node name="main" type="Node2D" unique_id=621330203]
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=1148835634]
+position = Vector2(13.5, 60)
+scale = Vector2(8.7890625, 5.734375)
+texture = ExtResource("2_0wfyh")
+
+[node name="Player" parent="." unique_id=906003102 instance=ExtResource("1_o5qli")]
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=665597747]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2132962877]
+
+[node name="sword" parent="." unique_id=1228483938 instance=ExtResource("3_sugp2")]
+position = Vector2(-41, 6)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1394052201]
+stream = ExtResource("4_jyhfs")
+autoplay = true
+
+[node name="coin" parent="." unique_id=1029385472 instance=ExtResource("5_tbgi4")]
+position = Vector2(168, 11)
