@@ -4,6 +4,10 @@ signal ispickedup(itemdata : Itemtype)
 
 @export var pickupnode : Node #probably the parent node that gets picked up
 
+func _ready() -> void:
+	if pickupnode is Area2D:
+		print("area2d",pickupnode.name)
+		pickupnode.body_entered.connect(_on_body_entered)
 
 func _on_body_entered(player: Node2D) -> void:
 	if player.is_in_group("player"):

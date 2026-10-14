@@ -7,15 +7,14 @@ var instance : Node
 
 func ENTER():
 	instance = pickupcomp.instantiate()
-	instance.pickupnode = self
+	instance.pickupnode = sword
 	instance.position = sword.position
 	add_child(instance)
 	
 	
 	
-func _on_pick_up(player): #signal connected to pickupnode when 
+func picked_up_by(player): #function thats initiated by the sword
 	print("sword picked up")
-	sword.player_node = player
 	Transitioned.emit(self,"equipstate")
 		
 func EXIT():

@@ -13,3 +13,7 @@ func _init() -> void: #on initialisation instead of ready, why? idk
 
 
 var player_node : Node
+
+func _on_pick_up(player):
+	player_node = player
+	pickup_state.picked_up_by(player)

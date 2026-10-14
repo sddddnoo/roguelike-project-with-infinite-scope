@@ -5,9 +5,16 @@
 [ext_resource type="Script" uid="uid://jjac8qtp8qum" path="res://scripts/pickup_state.gd" id="2_s4ec8"]
 [ext_resource type="Script" uid="uid://cln6l8s3gsyiu" path="res://scripts/equip_state.gd" id="3_k5whp"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(14, 53)
+
 [node name="sword" type="Area2D" unique_id=1228483938 node_paths=PackedStringArray("pickup_state")]
 script = ExtResource("1_n355p")
 pickup_state = NodePath("StateController/PickupState")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1038899571]
+position = Vector2(0, -14.5)
+shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="StateController" parent="." unique_id=1524661455 node_paths=PackedStringArray("initial_state") instance=ExtResource("2_1yp6w")]
 initial_state = NodePath("PickupState")
