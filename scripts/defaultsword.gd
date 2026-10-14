@@ -11,43 +11,53 @@ func _init() -> void: #on initialisation instead of ready, why? idk
 	itemdata.weapontype = Swordtype.Weapontype.WOOD
 
 
-var pickupcomp := preload("res://scenes/pickupcomponent.tscn")
 var player_node : Node
 
-
-enum State {
-	PICKUP,
-	EQUIPPED
-}
+@export var initial_state : Node
 
 var current_state : State
 
-
+var states := {}
 
 func _ready() -> void:
-	current_state = State.PICKUP
+	for child in get_children():
+		if child is State:
+			states[child.name.to_lower()] = child
+			child.Transitioned.connect(_on_child_transition)
+			
+			
+	if initial_state:
+		current_state = initial_state
 
 func _physics_process(delta: float) -> void:
+	if current_state:
+		current_state.PHYSICS_UPDATE(delta)
 	
-	match current_state:
-		State.PICKUP: pickup_state()
-		State.EQUIPPED: equip_state()
+func _process(delta: float) -> void:
+	if current_state:
+		current_state.UPDATE(delta)
 
 
-func _on_pick_up(player):
+func _on_pick_up(player): #signal connected to pickupnode when 
+	print("sword picked up")
+	
+	if current_state == initial_state:
+		current_state.ispickedup = true
 	player_node = player
-	current_state = State.EQUIPPED
 
 
 
-
-func equip_state():
-	
-	position = player_node.position
-	rotation = (get_global_mouse_position()-global_position).angle()+PI/2
-	
-func pickup_state():
-	var instance = pickupcomp.instantiate()
-	instance.pickupnode = self
-	add_child(instance)
 		
+func _on_child_transition(state,new_state_name):
+	if state != current_state:
+		return
+	print("trans")
+	var new_state = states.get(new_state_name.to_lower())
+	if !new_state:
+		return
+	if current_state:
+		current_state.EXIT()
+		
+	new_state.ENTER()
+	
+	current_state = new_state
