@@ -8,7 +8,6 @@ func _init() -> void: #on initialisation instead of ready, why? idk
 	itemdata.name = "wooden sword"
 	itemdata.damage = 5
 	itemdata.cooldown = 1
-	itemdata.range = 5
 	itemdata.weapontype = Swordtype.Weapontype.WOOD
 
 
