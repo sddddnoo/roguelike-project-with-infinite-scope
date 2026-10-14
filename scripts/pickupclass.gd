@@ -1,10 +1,12 @@
 extends Area2D
+
 signal ispickedup(itemdata : Itemtype)
-@export var pickupnode : Node
+
+@export var pickupnode : Node #probably the parent node that gets picked up
 
 
-func _on_body_entered(body: Node2D) -> void:
-	if body.has_method("_on_pick_up"):
-		ispickedup.connect(body._on_pick_up)
-		ispickedup.emit(pickupnode.itemdata)
-		pickupnode.queue_free()
+func _on_body_entered(player: Node2D) -> void:
+	if player.is_in_group("player"):
+		ispickedup.connect(pickupnode._on_pick_up)
+		ispickedup.emit(player) #transfers player node to the pickupnode
+		#pickupnode.queue_free() instead of queue_free im only gonna send the signal to the pickup node and each pickup node now decides what to do so that i dont need to create a separate weapon handler
