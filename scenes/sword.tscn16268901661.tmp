@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://byqpp8uatn1kq"]
+
+[ext_resource type="Script" uid="uid://d2rn2eh2fkl73" path="res://scripts/defaultsword.gd" id="1_n355p"]
+[ext_resource type="PackedScene" uid="uid://t7obpscxx2tp" path="res://scenes/state_controller.tscn" id="2_1yp6w"]
+[ext_resource type="PackedScene" uid="uid://b5romvp2xjue7" path="res://scenes/pickupcomponent.tscn" id="2_n355p"]
+[ext_resource type="Script" uid="uid://jjac8qtp8qum" path="res://scripts/pickup_state.gd" id="2_s4ec8"]
+[ext_resource type="Script" uid="uid://cln6l8s3gsyiu" path="res://scripts/equip_state.gd" id="3_k5whp"]
+
+[node name="sword" type="Area2D" unique_id=1228483938]
+script = ExtResource("1_n355p")
+
+[node name="StateController" parent="." unique_id=1524661455 instance=ExtResource("2_1yp6w")]
+
+[node name="PickupState" type="Node" parent="StateController" unique_id=2039895581 node_paths=PackedStringArray("statecontroller")]
+script = ExtResource("2_s4ec8")
+statecontroller = NodePath("../..")
+
+[node name="EquipState" type="Node" parent="StateController" unique_id=1579034400 node_paths=PackedStringArray("sword")]
+script = ExtResource("3_k5whp")
+sword = NodePath("../..")
+
+[node name="UnequipState" type="Node" parent="StateController" unique_id=1506373018]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1890057158]
+offset_left = -6.0
+offset_top = -40.0
+offset_right = 6.0
+color = Color(0.74577254, 0.2865345, 0.25200537, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1144748934]
+offset_left = -11.0
+offset_right = 11.0
+offset_bottom = 3.0
+color = Color(0.6392157, 0.2784314, 0.28235295, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=450762994]
+offset_left = -3.0
+offset_right = 3.0
+offset_bottom = 12.0
+color = Color(0.56078434, 0.22745098, 0.26666668, 1)
+
+[node name="pickupcomponent" parent="." unique_id=1901650996 node_paths=PackedStringArray("pickupnode") instance=ExtResource("2_n355p")]
+pickupnode = NodePath("..")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

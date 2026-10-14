@@ -10,7 +10,7 @@ func PHYSICS_UPDATE(delta : float):
 	var mouse_pos = (sword.get_global_mouse_position()-sword.global_position).normalized()
 	const _speed := 50
 		# Smoothly move the sword toward the target
-	var radius = 40
+	var radius = 30
 	var target_position = sword.player_node.global_position + mouse_pos * radius
 	sword.global_position = target_position
 

@@ -1,16 +1,22 @@
 extends State
 @export var statecontroller : Node
+@export var sword : Node
 var pickupcomp := preload("res://scenes/pickupcomponent.tscn")
-var ispickedup : bool
 
+var instance : Node
 
 func ENTER():
-	var instance = pickupcomp.instantiate()
+	instance = pickupcomp.instantiate()
 	instance.pickupnode = self
+	instance.position = sword.position
 	add_child(instance)
 	
-	ispickedup = false
 	
-func UPDATE(delta):
-	if ispickedup:
-		Transitioned.emit(self,"equipstate")
+	
+func _on_pick_up(player): #signal connected to pickupnode when 
+	print("sword picked up")
+	sword.player_node = player
+	Transitioned.emit(self,"equipstate")
+		
+func EXIT():
+	instance.queue_free()
